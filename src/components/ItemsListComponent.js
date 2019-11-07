@@ -1,32 +1,20 @@
 import React from "react";
 
-export default class ListComponent extends React.Component{
+const ListComponent = ({ items, updateItems }) => {
+  const handleClearButton = index => {
+    items.splice(index, 1);
+    updateItems(items);
+  };
 
-    handleClearButton (index) {
-        this.props.items.splice(index,1);
-        this.props.updateItems(this.props.items);
+  const listItems = items.map((item, index) => {
+    return (
+      <li key={index}>
+        {item.text}
+        <button onClick={() => handleClearButton(index)}>X</button>
+      </li>
+    );
+  });
+  return <ul className="listItems">{listItems}</ul>;
+};
 
-    }
-    handleCheckboxChange (index, event) {
-        this.props.items[index].completed = event.currentTarget.checked;
-        this.props.updateItems(this.props.items);
-    }
-
-    render () {
-        const listItems = this.props.items.map((item, index) => {
-            if (this.props.status === item.status) {
-                return (
-                    <li key={index}>
-                        <input type="checkbox" checked={item.completed} onChange={this.handleCheckboxChange.bind(this, index)}/>
-                        {item.text}
-                        <button onClick={this.handleClearButton.bind(this, index)}>X</button>
-                    </li>
-                )
-            }
-        });
-        return (
-            <ul className="listItems">{listItems}</ul>
-
-        );
-    }
-}
+export default ListComponent;
