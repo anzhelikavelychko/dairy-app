@@ -7,26 +7,50 @@ export default class InputComponent extends React.Component {
     this.setState({ value: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSavingOfItem = event => {
     event.preventDefault();
-    this.props.items.push({
-      text: this.state.value
-    });
+    const existedItems = localStorage.getItem("items");
+    let newItems = [];
 
-    this.props.updateItems(this.props.items);
+    if (existedItems) {
+      this.props.updateItems(JSON.parse(existedItems));
+      newItems = [
+        ...this.props.items,
+        {
+          text: this.state.value
+        }
+      ];
+      localStorage.setItem("items", JSON.stringify(newItems));
+    } else {
+      newItems = [
+        ...this.props.items,
+        {
+          text: this.state.value
+        }
+      ];
+      localStorage.setItem("items", JSON.stringify(newItems));
+    }
 
+    this.props.updateItems(newItems);
     this.setState({ value: "" });
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-      </form>
+      <div className="inputField">
+        <form
+          style={{ display: "flex", width: "80%" }}
+          onSubmit={this.handleSavingOfItem}
+        >
+          <input
+            style={{ width: "100%" }}
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+        </form>
+        <button onClick={this.handleSavingOfItem}>Add new</button>
+      </div>
     );
   }
 }
