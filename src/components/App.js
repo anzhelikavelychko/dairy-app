@@ -1,9 +1,10 @@
 import React from "react";
 import InputComponent from "./InputComponent";
-import ItemsListComponent from "./ItemsListComponent";
+import ListComponent from "./ListComponent";
+import CommentsComponent from "./CommentsComponent";
 
 export default class App extends React.Component {
-  state = { items: [] };
+  state = { items: [], selectedItem: null };
 
   componentDidMount() {
     let existedItems = localStorage.getItem("items");
@@ -16,6 +17,10 @@ export default class App extends React.Component {
     this.setState({ items: items });
   };
 
+  updateSelectedItem = item => {
+    this.setState({ selectedItem: item });
+  };
+
   render() {
     return (
       <div className="todos">
@@ -23,10 +28,12 @@ export default class App extends React.Component {
           items={this.state.items}
           updateItems={this.updateItems}
         />
-        <ItemsListComponent
+        <ListComponent
           items={this.state.items}
           updateItems={this.updateItems}
+          updateSelectedItem={this.updateSelectedItem}
         />
+        {this.state.selectedItem && <CommentsComponent selectedItem={this.state.selectedItem} />}
       </div>
     );
   }

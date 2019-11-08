@@ -1,10 +1,10 @@
 import React from "react";
 
 export default class InputComponent extends React.Component {
-  state = { value: "" };
+  state = { inputValue: "" };
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ inputValue: event.target.value });
   };
 
   handleSavingOfItem = event => {
@@ -17,7 +17,9 @@ export default class InputComponent extends React.Component {
       newItems = [
         ...this.props.items,
         {
-          text: this.state.value
+          id: Math.random(),
+          itemValue: this.state.inputValue,
+          comments: []
         }
       ];
       localStorage.setItem("items", JSON.stringify(newItems));
@@ -25,14 +27,16 @@ export default class InputComponent extends React.Component {
       newItems = [
         ...this.props.items,
         {
-          text: this.state.value
+          id: Math.random(),
+          itemValue: this.state.inputValue,
+          comments: []
         }
       ];
       localStorage.setItem("items", JSON.stringify(newItems));
     }
 
     this.props.updateItems(newItems);
-    this.setState({ value: "" });
+    this.setState({ inputValue: "" });
   };
 
   render() {
@@ -45,7 +49,7 @@ export default class InputComponent extends React.Component {
           <input
             style={{ width: "100%" }}
             type="text"
-            value={this.state.value}
+            value={this.state.inputValue}
             onChange={this.handleChange}
           />
         </form>
