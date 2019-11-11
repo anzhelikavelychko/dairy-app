@@ -1,12 +1,13 @@
 import React from "react";
 
-const ItemComponent = ({ item, updateSelectedItem, handleClearButton }) => {
-
+const ItemComponent = ({ item, updateSelectedItem, handleDeleteButton }) => {
   return (
-    <li key={item.id} onClick={() => updateSelectedItem(item)}>
-      {item.itemValue}
-      <button onClick={() => handleClearButton(item.id)}>X</button>
-    </li>
+    <div>
+      <li key={item.id} onClick={() => updateSelectedItem(item)}>
+        {item.itemValue}
+      </li>
+      <button onClick={() => handleDeleteButton(item.id)}>Delete</button>
+    </div>
   );
 };
 

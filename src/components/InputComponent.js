@@ -3,7 +3,7 @@ import React from "react";
 export default class InputComponent extends React.Component {
   state = { inputValue: "" };
 
-  handleChange = event => {
+  handleOnChangeEvent = event => {
     this.setState({ inputValue: event.target.value });
   };
 
@@ -50,7 +50,7 @@ export default class InputComponent extends React.Component {
             style={{ width: "100%" }}
             type="text"
             value={this.state.inputValue}
-            onChange={this.handleChange}
+            onChange={this.handleOnChangeEvent}
           />
         </form>
         <button onClick={this.handleSavingOfItem}>Add new</button>

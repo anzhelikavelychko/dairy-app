@@ -1,10 +1,18 @@
 import React from "react";
 import ItemComponent from "./ItemComponent";
 
-const ListComponent = ({ items, updateItems, updateSelectedItem }) => {
-  const handleClearButton = id => {
+const ListComponent = ({
+  items,
+  selectedItem,
+  updateItems,
+  updateSelectedItem
+}) => {
+  const handleDeleteButton = id => {
     const filteredItems = items.filter(item => item.id !== id);
 
+    if (selectedItem.id === id) {
+      updateSelectedItem(filteredItems[0]);
+    }
     localStorage.setItem("items", JSON.stringify(filteredItems));
     updateItems(filteredItems);
   };
@@ -16,7 +24,7 @@ const ListComponent = ({ items, updateItems, updateSelectedItem }) => {
           item={item}
           updateItems={updateItems}
           updateSelectedItem={updateSelectedItem}
-          handleClearButton={handleClearButton}
+          handleDeleteButton={handleDeleteButton}
         />
       ))}
     </ul>

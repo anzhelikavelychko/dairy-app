@@ -1,15 +1,21 @@
 import React from "react";
 import InputComponent from "./InputComponent";
 import ListComponent from "./ListComponent";
-import CommentsComponent from "./CommentsComponent";
+import CommentsList from "./CommentsList";
 
 export default class App extends React.Component {
-  state = { items: [], selectedItem: null };
+  state = { items: [], selectedItem: null, commentsList: [] };
 
   componentDidMount() {
-    let existedItems = localStorage.getItem("items");
+    const existedItems = JSON.parse(localStorage.getItem("items"));
+
     if (existedItems) {
-      this.setState({ items: JSON.parse(existedItems) });
+      const { comments } = existedItems[0];
+      this.setState({
+        items: existedItems,
+        selectedItem: existedItems[0],
+        commentsList: comments
+      });
     }
   }
 
@@ -18,22 +24,47 @@ export default class App extends React.Component {
   };
 
   updateSelectedItem = item => {
-    this.setState({ selectedItem: item });
+    const { comments } = item;
+    this.setState({ selectedItem: item, commentsList: comments });
+  };
+
+  updateCommentsList = commentsList => {
+    this.setState({ commentsList: commentsList });
+  };
+
+  updateCommentsOfSelectedItem = newCommentsList => {
+    const { selectedItem } = this.state;
+    const existedItems = JSON.parse(localStorage.getItem("items"));
+
+    const newItems = existedItems.map(item => {
+      if (item.id === selectedItem.id) {
+        item.comments = newCommentsList;
+      }
+      return item;
+    });
+
+    localStorage.setItem("items", JSON.stringify(newItems));
+    this.updateItems(newItems);
   };
 
   render() {
+    const { items, selectedItem, commentsList } = this.state;
     return (
       <div className="todos">
-        <InputComponent
-          items={this.state.items}
-          updateItems={this.updateItems}
-        />
+        <InputComponent items={items} updateItems={this.updateItems} />
         <ListComponent
-          items={this.state.items}
+          items={items}
+          selectedItem={selectedItem}
           updateItems={this.updateItems}
           updateSelectedItem={this.updateSelectedItem}
         />
-        {this.state.selectedItem && <CommentsComponent selectedItem={this.state.selectedItem} />}
+        {this.state.selectedItem && (
+          <CommentsList
+            commentsList={commentsList}
+            updateCommentsList={this.updateCommentsList}
+            updateCommentsOfSelectedItem={this.updateCommentsOfSelectedItem}
+          />
+        )}
       </div>
     );
   }
