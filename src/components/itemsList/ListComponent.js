@@ -1,5 +1,7 @@
 import React from "react";
 import ItemComponent from "./ItemComponent";
+import styles from './ItemList.module.css';
+
 
 const ListComponent = ({
   items,
@@ -17,7 +19,7 @@ const ListComponent = ({
     updateItems(filteredItems);
   };
   return (
-    <ul className="listItems">
+    <ul className={styles.listItemsContainer}>
       {items.map(item => (
         <ItemComponent
           key={item.id}

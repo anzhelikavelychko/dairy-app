@@ -1,0 +1,40 @@
+.listItemsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: 0;
+  padding: 0;
+}
+
+.listItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgrey;
+  border-radius: 5px;
+  list-style: none;
+}
+
+.listItems li {
+  display: flex;
+  justify-content: flex-start;
+  width: 85%;
+}
+
+.listItems button {
+  display: flex;
+  border-radius: 5px;
+  border-color: tomato;
+  color: tomato;
+}
+
+.countOfComments {
+  display: flex;
+	margin-left: 7px;
+	padding: 7px;
+	border-radius: 15px;
+  background: #28ccc0;
+  color: white;
+}

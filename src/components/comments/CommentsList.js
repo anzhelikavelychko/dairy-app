@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import CommentComponent from "./CommentComponent";
+import styles from "./Comments.module.css";
 
-const CommentsList = ({ commentsList,  updateCommentsList, updateCommentsOfSelectedItem }) => {
-
+const CommentsList = ({
+  commentsList,
+  selectedItem,
+  updateCommentsList,
+  updateCommentsOfSelectedItem
+}) => {
   const [commentValue, setCommentValue] = useState("");
 
   const handleOnChangeEvent = event => {
@@ -35,13 +40,18 @@ const CommentsList = ({ commentsList,  updateCommentsList, updateCommentsOfSelec
       return <li key={index}>{comment.text}</li>;
     });
     return (
-      <div>
-        <ul className="listItems">{listOfComments}</ul>
-        <CommentComponent
-          commentValue={commentValue}
-          handleOnChangeEvent={handleOnChangeEvent}
-          handleSavingOfComment={handleSavingOfComment}
-        />
+      <div className={styles.contentContainer}>
+        <div style={{ display: "flex", marginTop: "15px", marginLeft: "15px" }}>
+          Comments #{selectedItem.itemValue}
+        </div>
+        <div className={styles.commentsListContainer}>
+          <ul className={styles.commentsContainer}>{listOfComments}</ul>
+          <CommentComponent
+            commentValue={commentValue}
+            handleOnChangeEvent={handleOnChangeEvent}
+            handleSavingOfComment={handleSavingOfComment}
+          />
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
-import { Input } from "semantic-ui-react";
+import styles from './Comments.module.css';
+
 
 const CommentComponent = ({
   commentValue,
@@ -8,8 +9,8 @@ const CommentComponent = ({
 }) => {
 
   return (
-    <div>
-      <Input
+    <div className={styles.commentsContainer}>
+      <input
         value={commentValue}
         type="text"
         placeholder="Type your comment..."
@@ -20,7 +21,7 @@ const CommentComponent = ({
           }
         }}
       />
-      <div>To add new comment click CTRL+Enter</div>
+      <div style={{ display: "flex", color: "lightgray" }}>To add new comment click CTRL+Enter</div>
     </div>
   );
 };

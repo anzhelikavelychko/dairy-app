@@ -1,7 +1,8 @@
 import React from "react";
 import InputComponent from "./InputComponent";
-import ListComponent from "./ListComponent";
-import CommentsList from "./CommentsList";
+import ListComponent from "./itemsList/ListComponent";
+import CommentsList from "./comments/CommentsList";
+import styles from "../App.module.css";
 
 export default class App extends React.Component {
   state = { items: [], selectedItem: null, commentsList: [] };
@@ -50,17 +51,26 @@ export default class App extends React.Component {
   render() {
     const { items, selectedItem, commentsList } = this.state;
     return (
-      <div className="todos">
-        <InputComponent items={items} updateItems={this.updateItems} />
-        <ListComponent
-          items={items}
-          selectedItem={selectedItem}
-          updateItems={this.updateItems}
-          updateSelectedItem={this.updateSelectedItem}
-        />
+      <div className={styles.mainContainer}>
+        <div className={styles.logoContainer}>
+          <p>Dairy App</p>
+        </div>
+        <div className={styles.contentContainer}>
+          <div style={{ display: "flex", marginTop: "15px", marginLeft: "15px"}}>Items</div>
+          <div className={styles.listContainer}>
+            <InputComponent items={items} updateItems={this.updateItems} />
+            <ListComponent
+              items={items}
+              selectedItem={selectedItem}
+              updateItems={this.updateItems}
+              updateSelectedItem={this.updateSelectedItem}
+            />
+          </div>
+        </div>
         {this.state.selectedItem && (
           <CommentsList
             commentsList={commentsList}
+            selectedItem={selectedItem}
             updateCommentsList={this.updateCommentsList}
             updateCommentsOfSelectedItem={this.updateCommentsOfSelectedItem}
           />
