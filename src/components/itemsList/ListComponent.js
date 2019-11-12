@@ -1,7 +1,6 @@
 import React from "react";
 import ItemComponent from "./ItemComponent";
-import styles from './ItemList.module.css';
-
+import styles from "./ItemList.module.css";
 
 const ListComponent = ({
   items,
@@ -12,7 +11,7 @@ const ListComponent = ({
   const handleDeleteButton = id => {
     const filteredItems = items.filter(item => item.id !== id);
 
-    if (selectedItem.id === id) {
+    if (selectedItem && selectedItem.id === id) {
       updateSelectedItem(filteredItems[0]);
     }
     localStorage.setItem("items", JSON.stringify(filteredItems));

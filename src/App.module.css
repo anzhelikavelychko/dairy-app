@@ -7,10 +7,12 @@
 
 .logoContainer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   background: #2b2f3e;
   width: 15%;
-  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: lightslategray;
 }
 .contentContainer {
   display: flex;
@@ -21,17 +23,32 @@
   border: 3px solid lightgrey;
 }
 
+.headerOfContent {
+  display: flex;
+  margin-top: 15px;
+  margin-left: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: lightslategray;
+}
+
 .listContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.inputContainer {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .inputField {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 85%;
+  width: 95%;
   margin-top: 15px;
 }
 
@@ -40,4 +57,3 @@
   background: #28ccc0;
   color: white;
 }
-

@@ -9,6 +9,9 @@ const CommentsList = ({
   updateCommentsOfSelectedItem
 }) => {
   const [commentValue, setCommentValue] = useState("");
+  const [colorOfBlock, setColorOfBlock] = useState(false);
+
+  let listOfComments = [];
 
   const handleOnChangeEvent = event => {
     setCommentValue(event.target.value);
@@ -18,43 +21,49 @@ const CommentsList = ({
     const newCommentsList = [
       ...commentsList,
       {
-        text: value
+        text: value,
+        color: colorOfBlock ? "#ff8a00" : "#46568b"
       }
     ];
 
     updateCommentsOfSelectedItem(newCommentsList);
     updateCommentsList(newCommentsList);
     setCommentValue("");
+    setColorOfBlock(!colorOfBlock);
   };
 
-  if (!commentsList) {
-    return (
-      <CommentComponent
-        commentValue={commentValue}
-        handleOnChangeEvent={handleOnChangeEvent}
-        handleSavingOfComment={handleSavingOfComment}
-      />
-    );
-  } else {
-    const listOfComments = commentsList.map((comment, index) => {
-      return <li key={index}>{comment.text}</li>;
+  if (commentsList) {
+    listOfComments = commentsList.map((comment, index) => {
+      return (
+        <li key={index}>
+          <div
+            className={styles.colorOfBlock}
+            style={{ background: comment.color }}
+          ></div>
+          <div style={{ display: "flex", marginLeft: "10px" }}>
+            {comment.text}
+          </div>
+        </li>
+      );
     });
-    return (
-      <div className={styles.contentContainer}>
-        <div style={{ display: "flex", marginTop: "15px", marginLeft: "15px" }}>
-          Comments #{selectedItem.itemValue}
-        </div>
-        <div className={styles.commentsListContainer}>
-          <ul className={styles.commentsContainer}>{listOfComments}</ul>
-          <CommentComponent
-            commentValue={commentValue}
-            handleOnChangeEvent={handleOnChangeEvent}
-            handleSavingOfComment={handleSavingOfComment}
-          />
-        </div>
-      </div>
-    );
   }
+  return (
+    <div className={styles.contentContainer}>
+      <div className={styles.headerOfContent}>
+        Comments #{selectedItem.itemValue}
+      </div>
+      <div className={styles.commentsListContainer}>
+        {commentsList && (
+          <ul className={styles.commentsContainer}>{listOfComments}</ul>
+        )}
+        <CommentComponent
+          commentValue={commentValue}
+          handleOnChangeEvent={handleOnChangeEvent}
+          handleSavingOfComment={handleSavingOfComment}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default CommentsList;

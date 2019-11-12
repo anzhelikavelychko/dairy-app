@@ -11,12 +11,12 @@ export default class App extends React.Component {
     const existedItems = JSON.parse(localStorage.getItem("items"));
 
     if (existedItems) {
-      const { comments } = existedItems[0];
-      this.setState({
-        items: existedItems,
-        selectedItem: existedItems[0],
-        commentsList: comments
-      });
+      this.setState(
+        {
+          items: existedItems
+        },
+        () => this.updateSelectedItem(existedItems[0])
+      );
     }
   }
 
@@ -24,9 +24,25 @@ export default class App extends React.Component {
     this.setState({ items: items });
   };
 
-  updateSelectedItem = item => {
-    const { comments } = item;
-    this.setState({ selectedItem: item, commentsList: comments });
+  updateSelectedItem = selectedItem => {
+    const { items } = this.state;
+    const { comments } = selectedItem;
+
+    const newItems = items.map(item => {
+      if (item.id === selectedItem.id) {
+        item.isSelected = true;
+      } else {
+        item.isSelected = false;
+      }
+      return item;
+    });
+
+    this.setState({
+      items: newItems,
+      selectedItem: selectedItem,
+      commentsList: comments
+    });
+    localStorage.setItem("items", JSON.stringify(newItems));
   };
 
   updateCommentsList = commentsList => {
@@ -34,18 +50,17 @@ export default class App extends React.Component {
   };
 
   updateCommentsOfSelectedItem = newCommentsList => {
-    const { selectedItem } = this.state;
-    const existedItems = JSON.parse(localStorage.getItem("items"));
+    const { selectedItem, items } = this.state;
 
-    const newItems = existedItems.map(item => {
+    const newItems = items.map(item => {
       if (item.id === selectedItem.id) {
         item.comments = newCommentsList;
       }
       return item;
     });
 
+    this.setState({ items: newItems });
     localStorage.setItem("items", JSON.stringify(newItems));
-    this.updateItems(newItems);
   };
 
   render() {
@@ -56,7 +71,7 @@ export default class App extends React.Component {
           <p>Dairy App</p>
         </div>
         <div className={styles.contentContainer}>
-          <div style={{ display: "flex", marginTop: "15px", marginLeft: "15px"}}>Items</div>
+          <div className={styles.headerOfContent}>Items</div>
           <div className={styles.listContainer}>
             <InputComponent items={items} updateItems={this.updateItems} />
             <ListComponent
