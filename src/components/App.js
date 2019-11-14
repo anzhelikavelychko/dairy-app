@@ -2,7 +2,7 @@ import React from "react";
 import InputComponent from "./InputComponent";
 import ListComponent from "./itemsList/ListComponent";
 import CommentsList from "./comments/CommentsList";
-import styles from "../App.module.css";
+import styles from "./App.module.css";
 
 export default class App extends React.Component {
   state = { items: [], selectedItem: null, commentsList: [] };

@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 90%;
+  overflow: scroll;
   margin: 0;
   padding: 0;
 }
@@ -9,21 +11,30 @@
 .selectedItem {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin: 10px 0;
-  padding: 10px 0;
-  width: 95%;
+  align-items: center;
+  margin: 0.63rem 0;
   border-bottom: 1px solid lightgrey;
-  border-left: 4px solid tomato;
+  /* border-left: 4px solid tomato; */
   list-style: none;
+}
+.selectedItem .pointer {
+  width: 0.25rem;
+  background-color: tomato;
+}
+.selectedItem .value {
+  margin-left: 0;
+}
+.value {
+  display: flex; 
+  margin: 0;
+  margin-left: 0.25rem;
+  align-items: center;
 }
 .listItems {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin: 10px 0;
-  padding: 10px 0;
-  width: 95%;
+  align-items: center;
+  margin: 0.63rem 0;
   border-bottom: 1px solid lightgrey;
   list-style: none;
 }
@@ -32,7 +43,9 @@
 .selectedItem li {
   display: flex;
   justify-content: flex-start;
-  width: 85%;
+  width: 80%;
+  height: 100%;
+  padding: 0.63rem 0;
 }
 
 .listItems button,
@@ -40,20 +53,21 @@
   display: flex;
   justify-content: center;
   width: 15%;
+  margin-left: 0.44rem;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 0.32rem;
   border-color: tomato;
   color: tomato;
 }
 
 .countOfComments {
   display: flex;
-  margin-left: 7px;
-  padding: 7px;
-  border-radius: 15px;
+  margin-left: 0.44rem;
+  padding: 0.44rem;
+  border-radius: 0.95rem;
   background: #28ccc0;
   color: white;
-  height: 20px;
+  height: 1.25rem;
   align-items: center;
   box-sizing: border-box;
 }

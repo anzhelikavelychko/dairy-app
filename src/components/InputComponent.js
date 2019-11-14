@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../App.module.css";
+import styles from "./App.module.css";
 
 export default class InputComponent extends React.Component {
   state = { inputValue: "" };
@@ -31,11 +31,11 @@ export default class InputComponent extends React.Component {
       <div className={styles.inputContainer}>
         <div className={styles.inputField}>
           <form
-            style={{ display: "flex", width: "100%" }}
+            className={styles.inputForm}
             onSubmit={this.handleSavingOfItem}
           >
             <input
-              style={{ width: "100%", padding: "7px" }}
+              style={{ width: "100%", padding: "0.44rem" }}
               type="text"
               placeholder="Type name here.."
               value={this.state.inputValue}

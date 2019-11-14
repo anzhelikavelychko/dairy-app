@@ -7,16 +7,24 @@ const CommentComponent = ({
   handleSavingOfComment
 }) => {
   return (
-    <div className={styles.commentsContainer} style={{ flexDirection: "row" }}>
+    <div
+      className={styles.commentsContainer}
+      style={{
+        flexDirection: "row",
+        height: "15%",
+        overflow: "none",
+        margin: "0 0.93rem",
+        justifyContent: "center"
+      }}
+    >
       <div
         className={styles.colorOfBlock}
         style={{ background: "lightgrey" }}
       ></div>
-      <div className={styles.commentsContainer}>
-        <input
+      <div className={styles.commentsInput}>
+        <textarea
           value={commentValue}
           type="text"
-          placeholder="Type comment here..."
           onChange={handleOnChangeEvent}
           onKeyPress={e => {
             if (e.ctrlKey && e.key === "Enter") {
@@ -24,7 +32,7 @@ const CommentComponent = ({
             }
           }}
         />
-        <div style={{ display: "flex", color: "lightgray" }}>
+        <div style={{ display: "flex", color: "lightgray", fontSize: "0.75rem" }}>
           To add new comment click CTRL+Enter
         </div>
       </div>

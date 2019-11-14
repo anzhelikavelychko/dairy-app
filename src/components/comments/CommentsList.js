@@ -40,7 +40,7 @@ const CommentsList = ({
             className={styles.colorOfBlock}
             style={{ background: comment.color }}
           ></div>
-          <div style={{ display: "flex", marginLeft: "10px" }}>
+          <div style={{ display: "flex", marginLeft: "0.63rem" }}>
             {comment.text}
           </div>
         </li>
